@@ -1,0 +1,31 @@
+@import '../../node_modules/material-ui-sass/material-ui';
+//Rewrite some default bare tags to match better to the Material UI guidelines
+@import '../../node_modules/material-ui-sass/material-ui/html';
+//Layout styles
+
+.vs-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+a {
+  color: $pink-400;
+  text-decoration: none;
+}
+
+//page styles
+
+.vs-page {
+  padding: 20px;
+}
+
+.vs-page-ul {
+  list-style-type: none;
+
+}
+
+.vs-reconsraction {
+  color: $red-400;
+  text-align: center;
+}
