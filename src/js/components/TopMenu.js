@@ -7,7 +7,9 @@ var Menu = React.createClass({
 
     return (
       <div>
-        <AppBar className="mui-dark-theme" title="Voloshin Sergey - Frontender"/>
+        <AppBar 
+          title="Voloshin Sergey - Frontender" 
+          onMenuIconButtonTouchTap={this.props.toggleLeftBar} />
       </div>
     );
   }
@@ -15,3 +17,4 @@ var Menu = React.createClass({
 });
 
 module.exports = Menu;
+
