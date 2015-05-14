@@ -27833,15 +27833,30 @@ module.exports = require('./lib/React');
 },{"./lib/React":101}],244:[function(require,module,exports){
 var React = require('react');
 var TopMenu = require('./TopMenu');
+var LeftBar = require('./LeftBar');
 var Welcome = require('./pages/Welcome');
 var mui = require('material-ui');
 var FontIcon = mui.FontIcon;
 
 var Layout = React.createClass({displayName: "Layout",
+  getInitialState: function() {
+    return {
+      hideMenu: true
+    };
+  },
+
+
+  _toggleLeftBar: function() {
+    this.setState({
+      hideMenu: !this.state.hideMenu
+    });
+  },
+
   render: function() {
     return (
       React.createElement("div", null, 
-        React.createElement(TopMenu, null), 
+        React.createElement(TopMenu, {toggleLeftBar: this._toggleLeftBar}), 
+        React.createElement(LeftBar, null), 
         React.createElement("div", {className: "vs-container"}, 
           React.createElement(Welcome, null)
         )
@@ -27853,7 +27868,49 @@ var Layout = React.createClass({displayName: "Layout",
 module.exports = Layout;
 
 
-},{"./TopMenu":245,"./pages/Welcome":246,"material-ui":2,"react":243}],245:[function(require,module,exports){
+},{"./LeftBar":245,"./TopMenu":246,"./pages/Welcome":247,"material-ui":2,"react":243}],245:[function(require,module,exports){
+var React = require('react');
+var mui = require('material-ui');
+var LeftNav = mui.LeftNav;
+var MenuItem = mui.MenuItem;
+
+var LeftBar = React.createClass({displayName: "LeftBar",
+  render: function() {
+   
+    var menuItems = [
+      { type: MenuItem.Types.SUBHEADER, text: 'About me' },
+      { route: 'get-started', text: 'Get Started' },
+      { route: 'css-framework', text: 'CSS Framework' },
+      { route: 'components', text: 'Components' },
+      { type: MenuItem.Types.SUBHEADER, text: 'Resources' },
+      { 
+         type: MenuItem.Types.LINK, 
+         payload: 'https://github.com/callemall/material-ui', 
+         text: 'GitHub' 
+      },
+      { 
+         text: 'Disabled', 
+         disabled: true 
+      },
+      { 
+         type: MenuItem.Types.LINK, 
+         payload: 'https://www.google.com', 
+         text: 'Disabled Link', 
+         disabled: true 
+      },
+    ];
+
+    return (
+      React.createElement(LeftNav, {docked: false, menuItems: menuItems})
+    );
+  }
+
+});
+
+module.exports = LeftBar;
+
+
+},{"material-ui":2,"react":243}],246:[function(require,module,exports){
 var React = require('react');
 var mui = require('material-ui');
 var AppBar = mui.AppBar;
@@ -27863,7 +27920,9 @@ var Menu = React.createClass({displayName: "Menu",
 
     return (
       React.createElement("div", null, 
-        React.createElement(AppBar, {className: "mui-dark-theme", title: "Voloshin Sergey - Frontender"})
+        React.createElement(AppBar, {
+          title: "Voloshin Sergey - Frontender", 
+          onMenuIconButtonTouchTap: this.props.toggleLeftBar})
       )
     );
   }
@@ -27873,7 +27932,8 @@ var Menu = React.createClass({displayName: "Menu",
 module.exports = Menu;
 
 
-},{"material-ui":2,"react":243}],246:[function(require,module,exports){
+
+},{"material-ui":2,"react":243}],247:[function(require,module,exports){
 var React = require('react');
 var mui = require('material-ui');
 var Paper = mui.Paper;
@@ -27900,7 +27960,7 @@ var Welcome = React.createClass({displayName: "Welcome",
 module.exports = Welcome;
 
 
-},{"material-ui":2,"react":243}],247:[function(require,module,exports){
+},{"material-ui":2,"react":243}],248:[function(require,module,exports){
 var React = require('react');
 var Layout = require('./components/Layout');
 
@@ -27910,4 +27970,4 @@ React.render(
 )
 
 
-},{"./components/Layout":244,"react":243}]},{},[247])
+},{"./components/Layout":244,"react":243}]},{},[248])
