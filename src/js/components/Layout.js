@@ -1,35 +1,44 @@
 var React = require('react');
-var TopMenu = require('./TopMenu');
-var LeftBar = require('./LeftBar');
-var Welcome = require('./pages/Welcome');
 var mui = require('material-ui');
-var FontIcon = mui.FontIcon;
+var Router = require('react-router'); // or var Router = ReactRouter; in browsers
+var Menu = require('./Menu');
+var injectTapEventPlugin = require("react-tap-event-plugin");
+//router variables
+var DefaultRoute = Router.DefaultRoute;
+var Route = Router.Route;
+var RouteHandler = Router.RouteHandler;
+//pages for router
+var Welcome   = require('./pages/Welcome');
+var Skills    = require('./pages/Skills');
+var Interests = require('./pages/Interests');
+
+injectTapEventPlugin();
 
 var Layout = React.createClass({
-  getInitialState: function() {
-    return {
-      hideMenu: true
-    };
-  },
-
-
-  _toggleLeftBar: function() {
-    this.setState({
-      hideMenu: !this.state.hideMenu
-    });
-  },
-
   render: function() {
     return (
       <div>
-        <TopMenu toggleLeftBar={this._toggleLeftBar} />
-        <LeftBar />
+        <Menu />
         <div className='vs-container'>
-          <Welcome />
+          <RouteHandler/>
         </div>
       </div>
     );
   }
+});
+
+var routes = (
+  <Route name="app" path="/" handler={Layout}>
+    <Route name="welcome" handler={Welcome}/>
+    <Route name="skills" handler={Skills}/>
+    <Route name="interests" handler={Interests}/>
+    <DefaultRoute handler={Welcome}/>
+  </Route>
+);
+
+//Render page.
+Router.run(routes, function (Handler) {
+  React.render(<Handler/>, document.getElementById('app'));
 });
 
 module.exports = Layout;
