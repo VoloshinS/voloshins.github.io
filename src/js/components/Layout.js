@@ -11,6 +11,7 @@ var RouteHandler = Router.RouteHandler;
 var Welcome   = require('./pages/Welcome');
 var Skills    = require('./pages/Skills');
 var Interests = require('./pages/Interests');
+var SocialActivity = require('./pages/SocialActivity');
 
 injectTapEventPlugin();
 
@@ -32,6 +33,7 @@ var routes = (
     <Route name="welcome" handler={Welcome}/>
     <Route name="skills" handler={Skills}/>
     <Route name="interests" handler={Interests}/>
+    <Route name="social-activity" handler={SocialActivity}/>
     <DefaultRoute handler={Welcome}/>
   </Route>
 );
