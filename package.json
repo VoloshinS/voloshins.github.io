@@ -28,6 +28,7 @@
     "gulp-open": "^0.3.2",
     "gulp-react": "^3.0.1",
     "gulp-sass": "^2.0.1",
+    "jquery": "^2.1.4",
     "material-ui": "^0.7.5",
     "material-ui-sass": "^0.7.2",
     "react": "^0.13.3",

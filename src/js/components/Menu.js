@@ -27,6 +27,11 @@ var Menu = React.createClass({
          payload: '#interests',
          text: 'My Interests'
       },
+      {
+         type: MenuItem.Types.LINK,
+         payload: '#social-activity',
+         text: 'My Social Activity'
+      },
       { type: MenuItem.Types.SUBHEADER, text: 'My Social Pages' },
       {
          type: MenuItem.Types.LINK,
