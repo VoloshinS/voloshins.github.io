@@ -29,3 +29,14 @@ a {
   color: $red-400;
   text-align: center;
 }
+
+.vs-grid-wrapper > div {
+  width: 45%;
+  display: inline-block;
+  margin: 2.5%;
+  float: left;
+
+  > div {
+    padding: 20px;
+  }
+}

@@ -2541,3 +2541,13 @@ a {
 .vs-reconsraction {
   color: #ef5350;
   text-align: center; }
+
+/* line 33, stdin */
+.vs-grid-wrapper > div {
+  width: 45%;
+  display: inline-block;
+  margin: 2.5%;
+  float: left; }
+  /* line 39, stdin */
+  .vs-grid-wrapper > div > div {
+    padding: 20px; }
