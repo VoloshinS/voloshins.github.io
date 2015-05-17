@@ -40690,10 +40690,8 @@ var SocialActivity = React.createClass({displayName: "SocialActivity",
   render: function() {
     return (
       React.createElement("div", {className: "vs-grid-wrapper"}, 
-        React.createElement(LinkedInProfile, null), 
         React.createElement(GitHubProfile, null), 
-        React.createElement(StackOverflowProfile, null), 
-        React.createElement(TreeHouseProfile, null)
+        React.createElement(StackOverflowProfile, null)
       )
     );
   }
@@ -40731,15 +40729,21 @@ module.exports = Welcome;
 
 },{"material-ui":3,"react":287}],294:[function(require,module,exports){
 var React = require('react');
+var mui = require('material-ui');
+var Paper = mui.Paper;
+var $ = require('jquery');
 
 var GitHubProfile = React.createClass({displayName: "GitHubProfile",
 
   _loadData: function() {
-    var url ="https://api.github.com/users/VoloshinS"
+    var url ="https://api.github.com/users/VoloshinS";
     $.ajax({
       url: url, 
       success: function(data){
-        this.setState({data: data})
+        this.setState({data: data});
+      }.bind(this),
+      error: function(data){
+        console.log('Data not recieved!')
       }.bind(this)
     });
   },
@@ -40750,27 +40754,34 @@ var GitHubProfile = React.createClass({displayName: "GitHubProfile",
 
   getInitialState: function() {
     return {
-      data: [] 
+      data: {}
     };
   },
 
   render: function() {
-    
-    var data = JSON.parse(this.state.data);
-    var public_repos = data.public_repos;
-    var public_gists = data.public_gists;
-    var followers = data.followers;
-    var following = data.following;
-    var created_at = data.created_at;
+    var data = this.state.data;
+    var created_at = data.created_at || 0;
+    var public_repos = data.public_repos || 0;
+    var public_gists = data.public_gists || 0;
+    var followers = data.followers || 0;
+    var following = data.following || 0;
+
+    if (created_at) {
+      var formattedDate = new Date(Date.parse(created_at));
+      var d = formattedDate.getDate();
+      var m =  formattedDate.getMonth()+1;
+      var y = formattedDate.getFullYear();
+      created_at = d + "." + m + "." + y;
+    }
 
     return (
       React.createElement(Paper, null, 
-        React.createElement("h2", null, "GitHub Data:"), 
-        React.createElement("p", null, "Account created: ", public_repos), 
-        React.createElement("p", null, "Public repos: ", public_repos), 
-        React.createElement("p", null, "Public gists: ", public_gists), 
-        React.createElement("p", null, "Followers: ", followers), 
-        React.createElement("p", null, "Following: ", following)
+        React.createElement("h4", null, "GitHub Data:"), 
+        "Account created: ", created_at, React.createElement("br", null), 
+        "Public repos: ", public_repos, React.createElement("br", null), 
+        "Public gists: ", public_gists, React.createElement("br", null), 
+        "Followers: ", followers, React.createElement("br", null), 
+        "Following: ", following, React.createElement("br", null)
       )
     );
   }
@@ -40778,7 +40789,7 @@ var GitHubProfile = React.createClass({displayName: "GitHubProfile",
 
 module.exports = GitHubProfile;
 
-},{"react":287}],295:[function(require,module,exports){
+},{"jquery":2,"material-ui":3,"react":287}],295:[function(require,module,exports){
 var React = require('react');
 
 var LinkedInProfile = React.createClass({displayName: "LinkedInProfile",
@@ -40802,9 +40813,9 @@ var $ = require('jquery');
 var StackOverflowProfile = React.createClass({displayName: "StackOverflowProfile",
 
   _loadData: function() {
-    var url ="https://api.linkedin.com/v1/people/~:(skills,num-connections,picture-url)?oauth2_access_token=AQVXAoNRAoG0NUgkXtPwF-RZpUbmD3YbgImnzMEW6rmv0zC3rhmryAjY_WHoO1wg1IyN7CrxTvTsNK_nuC2ttR9YXI359rB8SrKn4PPLbqyRJq-LKyJb2Cze49dnfZU73bOqcvP3pGD8n4xRjU6LZl07q5nwbSjYJyt1YEYzx3AKaKZ8uoA&format=json"
+    var url ="https://api.stackexchange.com/2.2/users/3326919?order=desc&sort=reputation&site=stackoverflow"
     $.ajax({
-      url: url, 
+      url: url,
       success: function(data){
         this.setState({data: data})
       }.bind(this)
@@ -40817,27 +40828,35 @@ var StackOverflowProfile = React.createClass({displayName: "StackOverflowProfile
 
   getInitialState: function() {
     return {
-      data: [] 
+      data: {}
     };
   },
 
   render: function() {
     
     var data = this.state.data;
-    var connects = data ? 'I have ' + data.numConnections + ' connections in my account.' : 'Not recieve data'
-    var skills = '';
-    if (data.skills) {
-      skills = data.skills.values.map(function(chunk){
-        return (React.createElement("div", null, chunk.skill.name));
-      })
-    }
+    var items, created_at, reputation, bronze, silver, gold;
+    if (data.items) {
+      items = data.items[0];
+      var formattedDate = new Date(items.creation_date*1000);
+      var d = formattedDate.getDate();
+      var m =  formattedDate.getMonth()+1;
+      var y = formattedDate.getFullYear();
+      created_at = d + "." + m + "." + y;
 
+      reputation = items.reputation;
+      bronze = items.badge_counts.bronze;
+      silver = items.badge_counts.silver;
+      gold = items.badge_counts.gold;
+    }
     return (
       React.createElement(Paper, null, 
-        React.createElement("h2", null, "Linked In Data:"), 
-        React.createElement("p", null, connects), 
-        React.createElement("p", null, "Skills from my account:"), 
-        React.createElement("p", null, skills)
+        React.createElement("h4", null, "StackOverflow Data:"), 
+        "Account created: ", created_at, React.createElement("br", null), 
+        "My reputation: ", reputation, React.createElement("br", null), 
+        "Bronze badges: ", bronze, React.createElement("br", null), 
+        "Silver badges: ", silver, React.createElement("br", null), 
+        "Golden badges: ", gold, React.createElement("br", null)
       )
     );
   }

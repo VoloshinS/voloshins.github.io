@@ -6,9 +6,9 @@ var $ = require('jquery');
 var StackOverflowProfile = React.createClass({
 
   _loadData: function() {
-    var url ="https://api.linkedin.com/v1/people/~:(skills,num-connections,picture-url)?oauth2_access_token=AQVXAoNRAoG0NUgkXtPwF-RZpUbmD3YbgImnzMEW6rmv0zC3rhmryAjY_WHoO1wg1IyN7CrxTvTsNK_nuC2ttR9YXI359rB8SrKn4PPLbqyRJq-LKyJb2Cze49dnfZU73bOqcvP3pGD8n4xRjU6LZl07q5nwbSjYJyt1YEYzx3AKaKZ8uoA&format=json"
+    var url ="https://api.stackexchange.com/2.2/users/3326919?order=desc&sort=reputation&site=stackoverflow"
     $.ajax({
-      url: url, 
+      url: url,
       success: function(data){
         this.setState({data: data})
       }.bind(this)
@@ -21,27 +21,35 @@ var StackOverflowProfile = React.createClass({
 
   getInitialState: function() {
     return {
-      data: [] 
+      data: {}
     };
   },
 
   render: function() {
     
     var data = this.state.data;
-    var connects = data ? 'I have ' + data.numConnections + ' connections in my account.' : 'Not recieve data'
-    var skills = '';
-    if (data.skills) {
-      skills = data.skills.values.map(function(chunk){
-        return (<div>{chunk.skill.name}</div>);
-      })
-    }
+    var items, created_at, reputation, bronze, silver, gold;
+    if (data.items) {
+      items = data.items[0];
+      var formattedDate = new Date(items.creation_date*1000);
+      var d = formattedDate.getDate();
+      var m =  formattedDate.getMonth()+1;
+      var y = formattedDate.getFullYear();
+      created_at = d + "." + m + "." + y;
 
+      reputation = items.reputation;
+      bronze = items.badge_counts.bronze;
+      silver = items.badge_counts.silver;
+      gold = items.badge_counts.gold;
+    }
     return (
       <Paper>
-        <h2>Linked In Data:</h2>
-        <p>{connects}</p>
-        <p>Skills from my account:</p>
-        <p>{skills}</p>
+        <h4>StackOverflow Data:</h4>
+        Account created: {created_at}<br/>
+        My reputation: {reputation}<br/>
+        Bronze badges: {bronze}<br/>
+        Silver badges: {silver}<br/>
+        Golden badges: {gold}<br/>
       </Paper>
     );
   }

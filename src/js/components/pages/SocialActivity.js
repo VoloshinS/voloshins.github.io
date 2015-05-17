@@ -10,10 +10,8 @@ var SocialActivity = React.createClass({
   render: function() {
     return (
       <div className="vs-grid-wrapper">
-        <LinkedInProfile />
         <GitHubProfile />
         <StackOverflowProfile />
-        <TreeHouseProfile />
       </div>
     );
   }
