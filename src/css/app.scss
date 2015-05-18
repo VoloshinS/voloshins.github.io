@@ -1,3 +1,7 @@
+$primary-1-color: #4db6ac;
+$primary-2-color: #009688;
+$primary-3-color: #b2dfdb;
+
 @import '../../node_modules/material-ui-sass/material-ui';
 //Rewrite some default bare tags to match better to the Material UI guidelines
 @import '../../node_modules/material-ui-sass/material-ui/html';
@@ -10,7 +14,7 @@
 }
 
 a {
-  color: $pink-400;
+  color: $teal-800;
   text-decoration: none;
 }
 
