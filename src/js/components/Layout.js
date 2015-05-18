@@ -9,6 +9,7 @@ var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 //pages for router
 var Welcome   = require('./pages/Welcome');
+var Portfolio   = require('./pages/Portfolio');
 var Skills    = require('./pages/Skills');
 var Interests = require('./pages/Interests');
 var SocialActivity = require('./pages/SocialActivity');
