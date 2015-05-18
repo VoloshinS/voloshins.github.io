@@ -8,7 +8,7 @@ var GitHubProfile = React.createClass({
   _loadData: function() {
     var url ="https://api.github.com/users/VoloshinS";
     $.ajax({
-      url: url, 
+      url: url,
       success: function(data){
         this.setState({data: data});
       }.bind(this),
@@ -46,7 +46,7 @@ var GitHubProfile = React.createClass({
 
     return (
       <Paper>
-        <h4>GitHub Data:</h4>
+        <h4>GitHub:</h4>
         Account created: {created_at}<br/>
         Public repos: {public_repos}<br/>
         Public gists: {public_gists}<br/>

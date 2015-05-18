@@ -26,7 +26,7 @@ var StackOverflowProfile = React.createClass({
   },
 
   render: function() {
-    
+
     var data = this.state.data;
     var items, created_at, reputation, bronze, silver, gold;
     if (data.items) {
@@ -44,7 +44,7 @@ var StackOverflowProfile = React.createClass({
     }
     return (
       <Paper>
-        <h4>StackOverflow Data:</h4>
+        <h4>StackOverflow:</h4>
         Account created: {created_at}<br/>
         My reputation: {reputation}<br/>
         Bronze badges: {bronze}<br/>
