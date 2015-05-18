@@ -40803,7 +40803,8 @@ var SocialActivity = React.createClass({displayName: "SocialActivity",
     return (
       React.createElement("div", {className: "vs-grid-wrapper"}, 
         React.createElement(GitHubProfile, null), 
-        React.createElement(StackOverflowProfile, null)
+        React.createElement(StackOverflowProfile, null), 
+        React.createElement(TreeHouseProfile, null)
       )
     );
   }
@@ -40811,6 +40812,7 @@ var SocialActivity = React.createClass({displayName: "SocialActivity",
 });
 
 module.exports = SocialActivity;
+
 
 },{"./api-pages/GitHubProfile":295,"./api-pages/LinkedInProfile":296,"./api-pages/StackOverflowProfile":297,"./api-pages/TreeHouseProfile":298,"react":287}],294:[function(require,module,exports){
 var React = require('react');
@@ -40982,20 +40984,63 @@ module.exports = StackOverflowProfile;
 
 },{"jquery":2,"material-ui":3,"react":287}],298:[function(require,module,exports){
 var React = require('react');
+var mui = require('material-ui');
+var Paper = mui.Paper;
+var $ = require('jquery');
 
 var TreeHouseProfile = React.createClass({displayName: "TreeHouseProfile",
 
+  _loadData: function() {
+    var url ="https://teamtreehouse.com/sergeyvoloshin.json";
+    $.ajax({
+      url: url,
+      success: function(data){
+        this.setState({data: data});
+      }.bind(this),
+      error: function(data){
+        console.log('Data not recieved!')
+      }.bind(this)
+    });
+  },
+
+  componentDidMount: function() {
+    this._loadData();
+  },
+
+  getInitialState: function() {
+    return {
+      data: {}
+    };
+  },
+
   render: function() {
+    var data = this.state.data;
+    var badges, total, JavaScript, HTML, CSS;
+    if (data.badges) {
+      badges = data.badges.length || 0;
+      total = data.points.total || 0;
+      JavaScript = data.points.JavaScript || 0;
+      HTML = data.points.HTML || 0;
+      CSS = data.points.CSS || 0;
+    }
+
     return (
-      React.createElement("div", null)
+      React.createElement(Paper, null, 
+        React.createElement("h4", null, "TreeHouse:"), 
+        "Achived badges: ", badges, React.createElement("br", null), 
+        "JavaScript: ", JavaScript, React.createElement("br", null), 
+        "HTML: ", HTML, React.createElement("br", null), 
+        "CSS: ", CSS, React.createElement("br", null), 
+        "Total: ", total, React.createElement("br", null)
+      )
     );
   }
-
 });
 
 module.exports = TreeHouseProfile;
 
-},{"react":287}],299:[function(require,module,exports){
+
+},{"jquery":2,"material-ui":3,"react":287}],299:[function(require,module,exports){
 var React = require('react');
 var Layout = require('./components/Layout');
 

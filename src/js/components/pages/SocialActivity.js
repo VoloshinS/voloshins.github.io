@@ -12,6 +12,7 @@ var SocialActivity = React.createClass({
       <div className="vs-grid-wrapper">
         <GitHubProfile />
         <StackOverflowProfile />
+        <TreeHouseProfile />
       </div>
     );
   }
