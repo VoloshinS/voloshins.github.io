@@ -17,10 +17,14 @@ var SocialActivity = require('./pages/SocialActivity');
 injectTapEventPlugin();
 
 var Layout = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.func
+  },
+
   render: function() {
     return (
       <div>
-        <Menu />
+        <Menu router={this.context.router}/>
         <div className='vs-container'>
           <RouteHandler/>
         </div>
@@ -30,12 +34,12 @@ var Layout = React.createClass({
 });
 
 var routes = (
-  <Route name="app" path="/" handler={Layout}>
-    <Route name="welcome" handler={Welcome}/>
-    <Route name="skills" handler={Skills}/>
-    <Route name="interests" handler={Interests}/>
-    <Route name="social-activity" handler={SocialActivity}/>
-    <DefaultRoute handler={Welcome}/>
+  <Route path="/" handler={Layout} >
+    <Route name="Porfolio" path='/portfolio' handler={Portfolio} />
+    <Route name="Skills" path='/skills' handler={Skills}/>
+    <Route name="Interests" path='/interests' handler={Interests}/>
+    <Route name="Social Activity" path='social-activity' handler={SocialActivity}/>
+    <DefaultRoute handler={Welcome} />
   </Route>
 );
 
