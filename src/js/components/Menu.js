@@ -9,54 +9,84 @@ var Menu = React.createClass({
     this.refs.leftNav.toggle();
   },
 
+  _onLeftNavChange: function(e, key, payload) {
+    this._onLeftNavClick(payload)
+  },
+
+  _onHeaderClick: function() {
+    this._onLeftNavClick({route: '/', text: "Frontend Developer"})
+  },
+
+  _onLeftNavClick: function(payload) {
+    this.props.router.transitionTo(payload.route);
+    this.setState({
+      menuTitle: "Voloshin Sergey - " + payload.text
+    })
+    this.refs.leftNav.close();
+  },
+
+  getInitialState: function() {
+    return {
+      menuTitle: "Voloshin Sergey - Frontend Developer",
+    };
+  },
+
   render: function() {
+    var header = (
+      <div className='mui-app-bar'>
+        <a href='#' onClick={this._onHeaderClick} className='mui-app-bar-title vs-logo-title'>
+          Voloshin Sergey
+        </a>
+      </div>
+    );
+
     var menuItems = [
-      { type: MenuItem.Types.SUBHEADER, text: 'About me' },
       {
-         type: MenuItem.Types.LINK,
-         payload: '#welcome',
+         route: '/portfolio',
          text: 'Portfolio'
       },
       {
-         type: MenuItem.Types.LINK,
-         payload: '#skills',
+         route: '/skills',
          text: 'Professional Skills'
       },
       {
-         type: MenuItem.Types.LINK,
-         payload: '#interests',
+         route: '/interests',
          text: 'My Interests'
       },
       {
-         type: MenuItem.Types.LINK,
-         payload: '#social-activity',
+         route: '/social-activity',
          text: 'My Social Activity'
       },
       { type: MenuItem.Types.SUBHEADER, text: 'My Social Pages' },
       {
          type: MenuItem.Types.LINK,
          payload: 'https://github.com/VoloshinS',
-         text: 'GitHub'
+         text: 'GitHub',
+         target: 'blank'
       },
       {
          type: MenuItem.Types.LINK,
          payload: 'http://stackoverflow.com/users/3326919/voloshins',
-         text: 'StackOverflow'
+         text: 'StackOverflow',
+         target: 'blank'
       },
       {
          type: MenuItem.Types.LINK,
          payload: 'https://teamtreehouse.com/sergeyvoloshin',
-         text: 'TreeHouse'
+         text: 'TreeHouse',
+         target: 'blank'
       },
     ];
 
     return (
       <div>
         <AppBar
-          title="Voloshin Sergey - Frontend Developer"
+          title={this.state.menuTitle}
           onMenuIconButtonTouchTap={this._onLeftIconButtonTouchTap} />
         <LeftNav ref="leftNav"
           docked={false}
+          onChange={this._onLeftNavChange}
+          header={header}
           menuItems={menuItems} />
       </div>
     );

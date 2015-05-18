@@ -6,13 +6,14 @@ var Welcome = React.createClass({
   render: function() {
     return (
       <Paper innerClassName='vs-page'>
-        <h1>Welcome to my portfolio!</h1>
+        <h1>Nice to see you!</h1>
         <p className='mui-font-style-headline'>
           Here you will get possibility to know something about:
           <ul className='vs-page-ul mui-font-style-headline'>
-            <li><a href='#'>My works</a></li>
-            <li><a href='#'>My skills</a></li>
-            <li><a href='#'>My interests</a></li>
+            <li><a href='#portfolio'>My works</a></li>
+            <li><a href='#skills'>My skills</a></li>
+            <li><a href='#interests'>My interests</a></li>
+            <li><a href='#social-activity'>My social activity</a></li>
           </ul>
           <h1 className='vs-reconsraction'>SITE UNDER RECONSTRACTION!</h1>
         </p>
