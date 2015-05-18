@@ -40534,6 +40534,7 @@ var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 //pages for router
 var Welcome   = require('./pages/Welcome');
+var Portfolio   = require('./pages/Portfolio');
 var Skills    = require('./pages/Skills');
 var Interests = require('./pages/Interests');
 var SocialActivity = require('./pages/SocialActivity');
@@ -40541,10 +40542,14 @@ var SocialActivity = require('./pages/SocialActivity');
 injectTapEventPlugin();
 
 var Layout = React.createClass({displayName: "Layout",
+  contextTypes: {
+    router: React.PropTypes.func
+  },
+
   render: function() {
     return (
       React.createElement("div", null, 
-        React.createElement(Menu, null), 
+        React.createElement(Menu, {router: this.context.router}), 
         React.createElement("div", {className: "vs-container"}, 
           React.createElement(RouteHandler, null)
         )
@@ -40554,11 +40559,11 @@ var Layout = React.createClass({displayName: "Layout",
 });
 
 var routes = (
-  React.createElement(Route, {name: "app", path: "/", handler: Layout}, 
-    React.createElement(Route, {name: "welcome", handler: Welcome}), 
-    React.createElement(Route, {name: "skills", handler: Skills}), 
-    React.createElement(Route, {name: "interests", handler: Interests}), 
-    React.createElement(Route, {name: "social-activity", handler: SocialActivity}), 
+  React.createElement(Route, {path: "/", handler: Layout}, 
+    React.createElement(Route, {name: "Porfolio", path: "/portfolio", handler: Portfolio}), 
+    React.createElement(Route, {name: "Skills", path: "/skills", handler: Skills}), 
+    React.createElement(Route, {name: "Interests", path: "/interests", handler: Interests}), 
+    React.createElement(Route, {name: "Social Activity", path: "social-activity", handler: SocialActivity}), 
     React.createElement(DefaultRoute, {handler: Welcome})
   )
 );
@@ -40571,7 +40576,7 @@ Router.run(routes, function (Handler) {
 module.exports = Layout;
 
 
-},{"./Menu":289,"./pages/Interests":290,"./pages/Skills":291,"./pages/SocialActivity":292,"./pages/Welcome":293,"material-ui":3,"react":287,"react-router":96,"react-tap-event-plugin":114}],289:[function(require,module,exports){
+},{"./Menu":289,"./pages/Interests":290,"./pages/Portfolio":291,"./pages/Skills":292,"./pages/SocialActivity":293,"./pages/Welcome":294,"material-ui":3,"react":287,"react-router":96,"react-tap-event-plugin":114}],289:[function(require,module,exports){
 var React = require('react');
 var mui = require('material-ui');
 var AppBar = mui.AppBar;
@@ -40583,54 +40588,84 @@ var Menu = React.createClass({displayName: "Menu",
     this.refs.leftNav.toggle();
   },
 
+  _onLeftNavChange: function(e, key, payload) {
+    this._onLeftNavClick(payload)
+  },
+
+  _onHeaderClick: function() {
+    this._onLeftNavClick({route: '/', text: "Frontend Developer"})
+  },
+
+  _onLeftNavClick: function(payload) {
+    this.props.router.transitionTo(payload.route);
+    this.setState({
+      menuTitle: "Voloshin Sergey - " + payload.text
+    })
+    this.refs.leftNav.close();
+  },
+
+  getInitialState: function() {
+    return {
+      menuTitle: "Voloshin Sergey - Frontend Developer",
+    };
+  },
+
   render: function() {
+    var header = (
+      React.createElement("div", {className: "mui-app-bar"}, 
+        React.createElement("a", {href: "#", onClick: this._onHeaderClick, className: "mui-app-bar-title vs-logo-title"}, 
+          "Voloshin Sergey"
+        )
+      )
+    );
+
     var menuItems = [
-      { type: MenuItem.Types.SUBHEADER, text: 'About me' },
       {
-         type: MenuItem.Types.LINK,
-         payload: '#welcome',
+         route: '/portfolio',
          text: 'Portfolio'
       },
       {
-         type: MenuItem.Types.LINK,
-         payload: '#skills',
+         route: '/skills',
          text: 'Professional Skills'
       },
       {
-         type: MenuItem.Types.LINK,
-         payload: '#interests',
+         route: '/interests',
          text: 'My Interests'
       },
       {
-         type: MenuItem.Types.LINK,
-         payload: '#social-activity',
+         route: '/social-activity',
          text: 'My Social Activity'
       },
       { type: MenuItem.Types.SUBHEADER, text: 'My Social Pages' },
       {
          type: MenuItem.Types.LINK,
          payload: 'https://github.com/VoloshinS',
-         text: 'GitHub'
+         text: 'GitHub',
+         target: 'blank'
       },
       {
          type: MenuItem.Types.LINK,
          payload: 'http://stackoverflow.com/users/3326919/voloshins',
-         text: 'StackOverflow'
+         text: 'StackOverflow',
+         target: 'blank'
       },
       {
          type: MenuItem.Types.LINK,
          payload: 'https://teamtreehouse.com/sergeyvoloshin',
-         text: 'TreeHouse'
+         text: 'TreeHouse',
+         target: 'blank'
       },
     ];
 
     return (
       React.createElement("div", null, 
         React.createElement(AppBar, {
-          title: "Voloshin Sergey - Frontend Developer", 
+          title: this.state.menuTitle, 
           onMenuIconButtonTouchTap: this._onLeftIconButtonTouchTap}), 
         React.createElement(LeftNav, {ref: "leftNav", 
           docked: false, 
+          onChange: this._onLeftNavChange, 
+          header: header, 
           menuItems: menuItems})
       )
     );
@@ -40650,7 +40685,13 @@ var Interests = React.createClass({displayName: "Interests",
   render: function() {
     return (
       React.createElement(Paper, {innerClassName: "vs-page"}, 
-        React.createElement("h1", null, "My Interests")
+        React.createElement("h1", null, "My Interests"), 
+        React.createElement("h3", null, "Programming"), 
+        React.createElement("div", null, "New jS libraries, task runners, project generators. Reading about them, trying them at private projets etc."), 
+        React.createElement("h3", null, "English"), 
+        React.createElement("div", null, "Styding english with lingualeo.com, reading theguardian.com (at least one article per day), watching BBC news (at least 20 minutes in the morning), watching american tv series and cartoons, english courses in current company."), 
+        React.createElement("h3", null, "Gym, workout"), 
+        React.createElement("div", null, "Two times per week visitng gym, everymorning abs workout, squats and push-ups.")
       )
     );
   }
@@ -40664,11 +40705,82 @@ var React = require('react');
 var mui = require('material-ui');
 var Paper = mui.Paper;
 
+var Portfolio = React.createClass({displayName: "Portfolio",
+  render: function() {
+    var projectsData = [
+      {
+        url: 'http://nowshop.com',
+        thumbUrl: 'public/images/projects/nowshop.jpg',
+        title: 'NowShop'
+      },
+      {
+        url: 'http://shop.countryliving.co.uk',
+        thumbUrl: 'public/images/projects/countryliving.jpg',
+        title: 'Countryliving shop'
+      },
+      {
+        url: 'http://evilgeniuses.ru/',
+        thumbUrl: 'public/images/projects/evilgeniuses.jpg',
+        title: 'WOT clan site'
+      },
+      {
+        url: 'http://tango-store.com',
+        thumbUrl: 'public/images/projects/tango.jpg',
+        title: 'Tango store'
+      },
+    ]
+
+
+    var projects = projectsData.map(function(project){
+      return React.createElement(Project, {project: project})
+    })
+    return (
+      React.createElement(Paper, {innerClassName: "vs-page"}, 
+        React.createElement("h1", null, "Some of my previous projects and works:"), 
+        React.createElement("div", {className: "mui-font-style-headline vs-grid-wrapper"}, 
+          projects
+        )
+      )
+    );
+  }
+});
+
+var Project = React.createClass({displayName: "Project",
+  render: function() {
+    var project = this.props.project;
+
+    return (
+      React.createElement("a", {href: project.url, target: "blank"}, 
+        React.createElement("h4", null, project.title), 
+        React.createElement("img", {src: project.thumbUrl, alt: project.title})
+      )
+    );
+  }
+});
+
+module.exports = Portfolio;
+
+
+},{"material-ui":3,"react":287}],292:[function(require,module,exports){
+var React = require('react');
+var mui = require('material-ui');
+var Paper = mui.Paper;
+
 var Skills = React.createClass({displayName: "Skills",
   render: function() {
     return (
       React.createElement(Paper, {innerClassName: "vs-page"}, 
-        React.createElement("h1", null, "My skills")
+        React.createElement("h1", null, "My skills"), 
+        React.createElement("h3", null, "HTML"), 
+        React.createElement("div", null, "HTML4, HTML5, erb, haml, mustache, jade"), 
+        React.createElement("h3", null, "CSS"), 
+        React.createElement("div", null, "CSS2, CSS3, sass, less, bootstrap, grids"), 
+        React.createElement("h3", null, "JavaScript"), 
+        React.createElement("div", null, "ECMAScript 5, coffeescript, jquery, underscore, node, npm, react, gulp, grunt"), 
+        React.createElement("h3", null, "Ruby"), 
+        React.createElement("div", null, "Ruby 2.0, Rails 4.0"), 
+        React.createElement("h3", null, "Database"), 
+        React.createElement("div", null, "SQL, PostgreSQL")
       )
     );
   }
@@ -40677,7 +40789,7 @@ var Skills = React.createClass({displayName: "Skills",
 module.exports = Skills;
 
 
-},{"material-ui":3,"react":287}],292:[function(require,module,exports){
+},{"material-ui":3,"react":287}],293:[function(require,module,exports){
 var React = require('react');
 var LinkedInProfile = require('./api-pages/LinkedInProfile');
 var GitHubProfile = require('./api-pages/GitHubProfile');
@@ -40700,7 +40812,7 @@ var SocialActivity = React.createClass({displayName: "SocialActivity",
 
 module.exports = SocialActivity;
 
-},{"./api-pages/GitHubProfile":294,"./api-pages/LinkedInProfile":295,"./api-pages/StackOverflowProfile":296,"./api-pages/TreeHouseProfile":297,"react":287}],293:[function(require,module,exports){
+},{"./api-pages/GitHubProfile":295,"./api-pages/LinkedInProfile":296,"./api-pages/StackOverflowProfile":297,"./api-pages/TreeHouseProfile":298,"react":287}],294:[function(require,module,exports){
 var React = require('react');
 var mui = require('material-ui');
 var Paper = mui.Paper;
@@ -40709,13 +40821,14 @@ var Welcome = React.createClass({displayName: "Welcome",
   render: function() {
     return (
       React.createElement(Paper, {innerClassName: "vs-page"}, 
-        React.createElement("h1", null, "Welcome to my portfolio!"), 
+        React.createElement("h1", null, "Nice to see you!"), 
         React.createElement("p", {className: "mui-font-style-headline"}, 
           "Here you will get possibility to know something about:", 
           React.createElement("ul", {className: "vs-page-ul mui-font-style-headline"}, 
-            React.createElement("li", null, React.createElement("a", {href: "#"}, "My works")), 
-            React.createElement("li", null, React.createElement("a", {href: "#"}, "My skills")), 
-            React.createElement("li", null, React.createElement("a", {href: "#"}, "My interests"))
+            React.createElement("li", null, React.createElement("a", {href: "#portfolio"}, "My works")), 
+            React.createElement("li", null, React.createElement("a", {href: "#skills"}, "My skills")), 
+            React.createElement("li", null, React.createElement("a", {href: "#interests"}, "My interests")), 
+            React.createElement("li", null, React.createElement("a", {href: "#social-activity"}, "My social activity"))
           ), 
           React.createElement("h1", {className: "vs-reconsraction"}, "SITE UNDER RECONSTRACTION!")
         )
@@ -40727,7 +40840,7 @@ var Welcome = React.createClass({displayName: "Welcome",
 module.exports = Welcome;
 
 
-},{"material-ui":3,"react":287}],294:[function(require,module,exports){
+},{"material-ui":3,"react":287}],295:[function(require,module,exports){
 var React = require('react');
 var mui = require('material-ui');
 var Paper = mui.Paper;
@@ -40738,7 +40851,7 @@ var GitHubProfile = React.createClass({displayName: "GitHubProfile",
   _loadData: function() {
     var url ="https://api.github.com/users/VoloshinS";
     $.ajax({
-      url: url, 
+      url: url,
       success: function(data){
         this.setState({data: data});
       }.bind(this),
@@ -40776,7 +40889,7 @@ var GitHubProfile = React.createClass({displayName: "GitHubProfile",
 
     return (
       React.createElement(Paper, null, 
-        React.createElement("h4", null, "GitHub Data:"), 
+        React.createElement("h4", null, "GitHub:"), 
         "Account created: ", created_at, React.createElement("br", null), 
         "Public repos: ", public_repos, React.createElement("br", null), 
         "Public gists: ", public_gists, React.createElement("br", null), 
@@ -40789,7 +40902,8 @@ var GitHubProfile = React.createClass({displayName: "GitHubProfile",
 
 module.exports = GitHubProfile;
 
-},{"jquery":2,"material-ui":3,"react":287}],295:[function(require,module,exports){
+
+},{"jquery":2,"material-ui":3,"react":287}],296:[function(require,module,exports){
 var React = require('react');
 
 var LinkedInProfile = React.createClass({displayName: "LinkedInProfile",
@@ -40804,7 +40918,7 @@ var LinkedInProfile = React.createClass({displayName: "LinkedInProfile",
 
 module.exports = LinkedInProfile;
 
-},{"react":287}],296:[function(require,module,exports){
+},{"react":287}],297:[function(require,module,exports){
 var React = require('react');
 var mui = require('material-ui');
 var Paper = mui.Paper;
@@ -40833,7 +40947,7 @@ var StackOverflowProfile = React.createClass({displayName: "StackOverflowProfile
   },
 
   render: function() {
-    
+
     var data = this.state.data;
     var items, created_at, reputation, bronze, silver, gold;
     if (data.items) {
@@ -40851,7 +40965,7 @@ var StackOverflowProfile = React.createClass({displayName: "StackOverflowProfile
     }
     return (
       React.createElement(Paper, null, 
-        React.createElement("h4", null, "StackOverflow Data:"), 
+        React.createElement("h4", null, "StackOverflow:"), 
         "Account created: ", created_at, React.createElement("br", null), 
         "My reputation: ", reputation, React.createElement("br", null), 
         "Bronze badges: ", bronze, React.createElement("br", null), 
@@ -40865,7 +40979,8 @@ var StackOverflowProfile = React.createClass({displayName: "StackOverflowProfile
 
 module.exports = StackOverflowProfile;
 
-},{"jquery":2,"material-ui":3,"react":287}],297:[function(require,module,exports){
+
+},{"jquery":2,"material-ui":3,"react":287}],298:[function(require,module,exports){
 var React = require('react');
 
 var TreeHouseProfile = React.createClass({displayName: "TreeHouseProfile",
@@ -40880,9 +40995,9 @@ var TreeHouseProfile = React.createClass({displayName: "TreeHouseProfile",
 
 module.exports = TreeHouseProfile;
 
-},{"react":287}],298:[function(require,module,exports){
+},{"react":287}],299:[function(require,module,exports){
 var React = require('react');
 var Layout = require('./components/Layout');
 
 
-},{"./components/Layout":288,"react":287}]},{},[298])
+},{"./components/Layout":288,"react":287}]},{},[299])
