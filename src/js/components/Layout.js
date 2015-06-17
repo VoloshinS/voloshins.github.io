@@ -45,7 +45,7 @@ var routes = (
 
 //Render page.
 Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.getElementById('app'));
+  React.render(<Handler/>, document.getElementsByTagName('body')[0]);
 });
 
 module.exports = Layout;

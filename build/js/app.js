@@ -40570,7 +40570,7 @@ var routes = (
 
 //Render page.
 Router.run(routes, function (Handler) {
-  React.render(React.createElement(Handler, null), document.getElementById('app'));
+  React.render(React.createElement(Handler, null), document.getElementsByTagName('body')[0]);
 });
 
 module.exports = Layout;
@@ -41041,8 +41041,9 @@ module.exports = TreeHouseProfile;
 
 
 },{"jquery":2,"material-ui":3,"react":287}],299:[function(require,module,exports){
+window.jQuery = window.$ = require('jquery');
 var React = require('react');
 var Layout = require('./components/Layout');
 
 
-},{"./components/Layout":288,"react":287}]},{},[299])
+},{"./components/Layout":288,"jquery":2,"react":287}]},{},[299])
