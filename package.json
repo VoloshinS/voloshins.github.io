@@ -4,7 +4,7 @@
   "description": "Github pages of frontend dev Voloshin Sergey.",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Will be implemented soon.\""
   },
   "repository": {
     "type": "git",
