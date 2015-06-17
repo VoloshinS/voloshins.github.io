@@ -1,0 +1,13 @@
+sudo: false
+script:
+    - gulp build
+    - npm test
+notifications:
+  email:
+    - voloshin1986@gmail.com
+language: node_js
+node_js:
+    - "0.10"
+before_install:
+    - export DISPLAY=:99.0
+    - sh -e /etc/init.d/xvfb start
