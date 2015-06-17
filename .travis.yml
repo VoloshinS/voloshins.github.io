@@ -1,6 +1,5 @@
 sudo: false
 script:
-    - gulp build
     - npm test
 notifications:
   email:
