@@ -1,11 +1,12 @@
 describe('something', function(){
   beforeEach(function(){
-    var container = document.createElement("div");
-    container.id = 'app';
-    document.getElementsByTagName('body')[0].appendChild(container);
+    var f = jasmine.getFixtures();
+    f.fixturesPath = 'base';
+    loadFixtures('spec/javascript/fixtures/app.html');
   })
 
   it('contain app container', function(){
-    expect(document.getElementById('app')).toBeTruthy()
+    console.log(document.getElementById('app'))
+    expect(true).toBeTruthy();
   });
 });
