@@ -40731,8 +40731,8 @@ var Portfolio = React.createClass({displayName: "Portfolio",
     ]
 
 
-    var projects = projectsData.map(function(project){
-      return React.createElement(Project, {project: project})
+    var projects = projectsData.map(function(project, indx){
+      return React.createElement(Project, {key: indx, project: project})
     })
     return (
       React.createElement(Paper, {innerClassName: "vs-page"}, 

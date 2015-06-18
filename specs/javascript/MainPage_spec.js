@@ -11,6 +11,7 @@ describe('Main page', function(){
 
   it('contain links to pages', function(){
     var menuText = $('.vs-page-ul.mui-font-style-headline').text();
+    
     expect(menuText).toMatch('My works');
     expect(menuText).toMatch('My skills');
     expect(menuText).toMatch('My interests');

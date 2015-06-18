@@ -15,9 +15,16 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'specs/javascript/*.js',
       'build/js/*.js',
-      'specs/javascript/*.js'
+      'build/css/app.css',
+      {pattern: 'public/images/**/*', included: false}
     ],
+
+    proxies: {
+      '/public/': '/base/public/',
+      '/favicon.ico':'/base/public/images/favicon.ico'
+    },
 
 
     // list of files to exclude

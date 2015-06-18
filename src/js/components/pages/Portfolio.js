@@ -28,8 +28,8 @@ var Portfolio = React.createClass({
     ]
 
 
-    var projects = projectsData.map(function(project){
-      return <Project project={project} />
+    var projects = projectsData.map(function(project, indx){
+      return <Project key={indx} project={project} />
     })
     return (
       <Paper innerClassName='vs-page'>
