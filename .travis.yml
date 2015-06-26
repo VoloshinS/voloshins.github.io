@@ -12,6 +12,4 @@ before_install:
     - sh -e /etc/init.d/xvfb start
     - npm install -g karma-cli
 addons:
-  sauce_connect:
-    username: "VoloshinS"
-    access_key: "40c58650-7285-4111-989c-cb75b44f495f"
+  sauce_connect: true
