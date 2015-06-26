@@ -4,7 +4,7 @@
   "description": "Github pages of frontend dev Voloshin Sergey.",
   "main": "index.html",
   "scripts": {
-    "test": "karma start karma.conf.js --single-run"
+    "test": "karma start karma.conf.js"
   },
   "repository": {
     "type": "git",

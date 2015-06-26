@@ -2,33 +2,25 @@
 // Generated on Wed Jun 03 2015 22:40:09 GMT+0300 (EEST)
 
 module.exports = function(config) {
+
+  console.log("SAUCE_USERNAME==============" + process.env.SAUCE_USERNAME)
+  console.log("SAUCE_ACCESS_KEY==============" + process.env.SAUCE_ACCESS_KEY)
   // Example set of browsers to run on Sauce Labs
   // Check out https://saucelabs.com/platforms for all browser/platform combos
   var customLaunchers = {
-    sl_chrome: {
+    'SL_Chrome': {
       base: 'SauceLabs',
-      browserName: 'chrome',
-      platform: 'Windows 7',
-      version: '35'
+      browserName: 'chrome'
+    },
+    'SL_InternetExplorer': {
+      base: 'SauceLabs',
+      browserName: 'internet explorer',
+      version: '10'
+    },
+    'SL_FireFox': {
+      base: 'SauceLabs',
+      browserName: 'firefox',
     }
-    // ,
-    // sl_firefox: {
-    //   base: 'SauceLabs',
-    //   browserName: 'firefox',
-    //   version: '30'
-    // },
-    // sl_ios_safari: {
-    //   base: 'SauceLabs',
-    //   browserName: 'iphone',
-    //   platform: 'OS X 10.9',
-    //   version: '7.1'
-    // },
-    // sl_ie_11: {
-    //   base: 'SauceLabs',
-    //   browserName: 'internet explorer',
-    //   platform: 'Windows 8.1',
-    //   version: '11'
-    // }
   };
 
   config.set({
@@ -36,12 +28,6 @@ module.exports = function(config) {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
-    sauceLabs: {
-        testName: 'Web App Unit Tests'
-    },
-    customLaunchers: customLaunchers,
-    browsers: Object.keys(customLaunchers),
-    reporters: ['dots', 'saucelabs'],
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine-jquery','jasmine'],
@@ -75,7 +61,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['dots', 'saucelabs'],
 
 
     // web server port
@@ -92,15 +78,22 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+    // autoWatch: true,
 
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
 
+    sauceLabs: {
+        testName: 'Test my site with sauceLabs'
+    },
+    captureTimeout: 120000,
+    customLaunchers: customLaunchers,
+    browsers: Object.keys(customLaunchers),
+
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: true
   });
 };
