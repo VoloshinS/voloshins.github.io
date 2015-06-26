@@ -2,9 +2,6 @@
 // Generated on Wed Jun 03 2015 22:40:09 GMT+0300 (EEST)
 
 module.exports = function(config) {
-
-  console.log("SAUCE_USERNAME==============" + process.env.SAUCE_USERNAME)
-  console.log("SAUCE_ACCESS_KEY==============" + process.env.SAUCE_ACCESS_KEY)
   // Example set of browsers to run on Sauce Labs
   // Check out https://saucelabs.com/platforms for all browser/platform combos
   var customLaunchers = {
