@@ -10,7 +10,7 @@ node_js:
 before_install:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
-    - npm install -g karma-cli
+before_script: npm install -g karma-cli
 env:
   global:
     - secure: 4nHqdLtMrqFeS6QKVZZO0gm2a60RnD0I+BARoaGnxGpJWImqrl51hl6QZI5WlZsFkpvNwkCD4RdzOvuZVKnSzmW66YEHYwsSy1fa6AnkmrOeLsR/JDo67oixIhuqRAMBvo1SkjiX76GmvUJ3qxKK16BAb0R8ZrCo0pjTMPfZbfWbBfU37RaBkExADVAX9e7h9CwTAipcnT8YzZWRmncQvGanWoKw7+MsUnhf+jbSMn4YKw/3TzHL3MDkmG4fARDGX62lY1cTTOa6SZ3xyxo8GiASOVV6poMfdRncbhKE1YAgrSFwD1Rrs4oqwSOdrQt6/V5oOEFFU89CLjjKB9aDoxPxw97y+eMDK7y9D268K99ohroXo/ftdktewCQfDySocxKjiql1vtdtzzRKd2LsBIkIMnA3sUvY8Ni8fVyjGOqPrhGOHgnaDsostxh23rMm3MlB8zS66/CfSGVvF7zsUXkkmEqXkvlRBMnIU4289uiTMcSMCOZH54N04A8t9J52wa/fab/NLGqgErkg0IJi/RS/td9JJOx5vrlXjJUJTFRHj25o8+XEDrK+mL4Q4oDCwU9x/XZrljDzBSHZlFmvBa7vHv7y+ZNJgzTVG4wqJneHKF3zU3aOAulus/DQN2V9AHA5WVaaxRTR3CTUolmteVP6RBNHUuKsSXXGiAtA3aY=
