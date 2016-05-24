@@ -66,7 +66,7 @@ describe('<HomePage />', () => {
     const renderedComponent = mount(
       <HomePage loading changeRoute={openRoute} />
     );
-    const button = renderedComponent.find('button');
+    const button = renderedComponent.find('button').first();
     button.simulate('click');
     expect(openRouteSpy).toHaveBeenCalled();
   });

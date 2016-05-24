@@ -51,6 +51,12 @@ export class HomePage extends React.Component {
   openFeaturesPage = () => {
     this.openRoute('/features');
   };
+  /**
+   * Changed route to '/features'
+   */
+  openLibraryPage = () => {
+    this.openRoute('/library');
+  };
 
   render() {
     let mainContent = null;
@@ -96,6 +102,7 @@ export class HomePage extends React.Component {
             {mainContent}
           </section>
           <Button handleRoute={this.openFeaturesPage}>Features</Button>
+          <Button handleRoute={this.openLibraryPage}>Library</Button>
         </div>
       </article>
     );
