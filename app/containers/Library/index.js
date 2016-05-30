@@ -16,6 +16,7 @@ import { loadBooks } from './actions';
 
 import H2 from 'components/H2';
 import Table from 'components/Table';
+import LoadingIndicator from 'components/LoadingIndicator';
 
 import styles from './styles.css';
 
@@ -28,7 +29,7 @@ class Library extends React.Component {
     return (
       <div className={styles.library}>
         <H2>{'100 books about JS'}</H2>
-        {this.props.books && <Table items={this.props.books} />}
+        {!this.props.books ? <LoadingIndicator /> : <Table items={this.props.books} />}
       </div>
     );
   }

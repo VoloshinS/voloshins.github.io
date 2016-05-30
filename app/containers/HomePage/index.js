@@ -24,85 +24,80 @@ import {
 import { changeUsername } from './actions';
 import { loadRepos } from '../App/actions';
 
-import RepoListItem from 'containers/RepoListItem';
+import A from 'components/A';
 import Button from 'components/Button';
 import H2 from 'components/H2';
-import List from 'components/List';
-import ListItem from 'components/ListItem';
-import LoadingIndicator from 'components/LoadingIndicator';
+import H3 from 'components/H3';
+import Row from 'components/Row';
+import Column from 'components/Column';
+import Projects from 'components/Projects';
 
 import styles from './styles.css';
+import storageIcon from './icons/storage.svg';
+import bookIcon from './icons/book.svg';
+import articleIcon from './icons/article.svg';
 
+import { PROJECTS } from '../../projectsData';
 export class HomePage extends React.Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
-  /**
-   * Changes the route
-   *
-   * @param  {string} route The route we want to go to
-   */
-  openRoute = (route) => {
-    this.props.changeRoute(route);
-  };
-
-  /**
-   * Changed route to '/features'
-   */
-  openFeaturesPage = () => {
-    this.openRoute('/features');
-  };
-  /**
-   * Changed route to '/features'
-   */
-  openLibraryPage = () => {
-    this.openRoute('/library');
-  };
-
   render() {
-    let mainContent = null;
-
-    // Show a loading indicator when we're loading
-    if (this.props.loading) {
-      mainContent = (<List component={LoadingIndicator} />);
-
-    // Show an error if there is one
-    } else if (this.props.error !== false) {
-      const ErrorComponent = () => (
-        <ListItem item={'Something went wrong, please try again!'} />
-      );
-      mainContent = (<List component={ErrorComponent} />);
-
-    // If we're not loading, don't have an error and there are repos, show the repos
-    } else if (this.props.repos !== false) {
-      mainContent = (<List items={this.props.repos} component={RepoListItem} />);
-    }
-
     return (
       <article>
         <div>
-          <section className={`${styles.textSection} ${styles.centered}`}>
-            <H2>Start your next react project in seconds</H2>
-            <p>A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices</p>
+          <section className={`${styles.textSection}`}>
+            <H2>{'Work'}</H2>
+            <Projects projects={[PROJECTS[0]]} />
+            <Button handleRoute={() => this.props.changeRoute('/projects')}>{'More Projects'}</Button>
           </section>
-          <section className={styles.textSection}>
-            <H2>Try me!</H2>
-            <form className={styles.usernameForm} onSubmit={this.props.onSubmitForm}>
-              <label htmlFor="username">Show Github repositories by
-                <span className={styles.atPrefix}>@</span>
-                <input
-                  id="username"
-                  className={styles.input}
-                  type="text"
-                  placeholder="mxstbr"
-                  value={this.props.username}
-                  onChange={this.props.onChangeUsername}
-                />
-              </label>
-            </form>
-            {mainContent}
+          <section className={`${styles.textSection}`}>
+            <H2>Open Source</H2>
+            <Row>
+              <Column>
+                <A target="blank" href="https://github.com/VoloshinS/simpleStorage" className={styles.card}>
+                  <div className={styles.cardContent}>
+                    <H3 className={`${styles.cardContentTitle} ${styles.cardContentTitleWithImage}`}>
+                      <div
+                        className={styles.cardContentTitleIcon}
+                        style={{ backgroundImage: `url(${storageIcon})` }}
+                      />
+                      {'Simple Browser Storage'}
+                    </H3>
+                    <div className={styles.cardContentDescription}>
+                      {'Module which allows to store application state in localStorage or Cookies (dependent on what is accessible for current browser)'}
+                    </div>
+                  </div>
+                </A>
+              </Column>
+            </Row>
           </section>
-          <Button handleRoute={this.openFeaturesPage}>Features</Button>
-          <Button handleRoute={this.openLibraryPage}>Library</Button>
+          <section className={`${styles.textSection}`}>
+            <H2>{'My Library'}</H2>
+            <Row>
+              <Column>
+                <A to="/library" className={styles.card}>
+                  <div className={styles.cardContent}>
+                    <H3 className={`${styles.cardContentTitle} ${styles.cardContentTitleWithImage}`}>
+                      <div className={styles.cardContentTitleIcon} style={{ backgroundImage: `url(${bookIcon})` }} />
+                      {'100 books about JavaScript'}
+                    </H3>
+                    <div className={styles.cardContentDescription}>{'In 2016 I have made a resolution - constanly read books about JavaScript. Later this resolution transformed into a goal - complete 100 books about JavaScript. This section contains list of the books, which I have read and are going to read.'}</div>
+                  </div>
+                </A>
+              </Column>
+              <Column>
+                <A to="/articles" className={styles.card}>
+                  <div className={styles.cardContent}>
+                    <H3 className={`${styles.cardContentTitle} ${styles.cardContentTitleWithImage}`}>
+                      <div className={styles.cardContentTitleIcon} style={{ backgroundImage: `url(${articleIcon})` }} />
+                      {'1000 articles about JavaScript'}
+                    </H3>
+                    <div className={styles.cardContentDescription}>{'In 2016 I have made another resolution - constanly read articles about JavaScript. Later this resolution transformed into a goal - complete 1000 articles about JavaScript. This section contains list of the articles, which I have read.'}</div>
+                  </div>
+                </A>
+              </Column>
+            </Row>
+          </section>
         </div>
       </article>
     );

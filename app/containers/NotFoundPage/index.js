@@ -15,12 +15,8 @@ export function NotFound(props) {
   return (
     <article>
       <H1>Page not found.</H1>
-      <Button
-        handleRoute={function redirect() {
-          props.changeRoute('/');
-        }}
-      >
-        Home
+      <Button handleRoute={() => props.changeRoute('/')}>
+        {'Home'}
       </Button>
     </article>
   );

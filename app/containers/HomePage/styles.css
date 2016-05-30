@@ -10,12 +10,6 @@
   text-align: center;
 }
 
-p,
-label {
-  font-family: Georgia, Times, 'Times New Roman', serif;
-  line-height: 1.5em;
-}
-
 .link {
   text-decoration: none;
 }
@@ -39,4 +33,45 @@ label {
 .atPrefix {
   color: black;
   margin-left: 0.4em;
+}
+
+.card {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 6px, rgba(0, 0, 0, 0.1) 0 1px 4px;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.870588);
+  display: block;
+  min-height: 100px;
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  z-index: 1;
+}
+
+.card:hover {
+  background-color: #FEFEFE;
+}
+
+.cardContent {
+  padding: 10px;
+}
+
+.cardContentTitle {
+  font-weight: normal;
+  font-size: 110%;
+  margin-bottom: 10px;
+}
+
+.cardContentDescription {
+  color: rgba(95, 95, 95, 1);
+  font-size: 90%;
+}
+.cardContentTitleIcon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-position: 50%;
+  background-size: 100%;
+  vertical-align: middle;
+  margin-right: 5px;
 }

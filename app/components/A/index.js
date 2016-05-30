@@ -3,12 +3,15 @@
  */
 
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
 import styles from './styles.css';
 
 function A(props) {
+  const Component = props.to ? Link : 'a';
+
   return (
-    <a
+    <Component
       className={
         props.className || styles.link
       }
@@ -19,7 +22,8 @@ function A(props) {
 
 A.propTypes = {
   className: PropTypes.string,
-  href: PropTypes.string.isRequired,
+  href: PropTypes.string,
+  to: PropTypes.string,
   target: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
