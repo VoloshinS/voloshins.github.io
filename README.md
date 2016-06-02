@@ -1,5 +1,7 @@
-# voloshins.github.io
+###https://voloshins.js.org
 <img src='https://travis-ci.org/VoloshinS/voloshins.github.io.svg?branch=master' />
 [![Code Climate](https://codeclimate.com/github/VoloshinS/voloshins.github.io/badges/gpa.svg)](https://codeclimate.com/github/VoloshinS/voloshins.github.io)
 
-My portfolio site on github pages (currently under reconstruction http://voloshins.js.org).
+Portfolio website on github pages (currently in development mode http://voloshins.js.org).
+
+Powered by React.js, Redux, Node.js, Firebase, RedHead.

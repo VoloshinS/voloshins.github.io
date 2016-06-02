@@ -1,0 +1,60 @@
+.projectsImage {
+  max-width: 100%;
+  -webkit-filter: grayscale(1);
+  -webkit-filter: grayscale(100%);
+  filter: gray;
+  filter: grayscale(100%);
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.2s linear;
+  border: 1px solid #999;
+  opacity: 0.5;
+}
+
+.projectsImage:hover {
+  max-width: 100%;
+  opacity: 1;
+}
+
+.imageCard {
+  display: block;
+  width: 100%;
+  padding-bottom: 60%;
+  position: relative;
+  background-size: auto 100%;
+  background-position: 50%;
+  color: #FFF;
+  font-size: 90%;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+}
+
+.imageCardInfo {
+  transition: all 0.2s linear;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,.4);
+  padding: 10px;
+}
+
+.imageCard:hover .imageCardInfo {
+  padding-bottom: 15px;
+}
+
+.imageCardInfoTitle {
+  font-weight: normal;
+  font-size: 100%;
+}
+
+.imageCardInfoInfo {
+  font-size: 80%;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.imageCardInfoDescription {
+  font-size: 90%;
+  color: rgba(255, 255, 255, 0.95);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

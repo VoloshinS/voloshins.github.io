@@ -1,0 +1,21 @@
+.container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.container::before,
+.container::after {
+  content: '';
+  display: table;
+}
+
+.container::after {
+  clear: both;
+}
+
+.containerWrapper {
+  width: 100%;
+  display: block;
+}
