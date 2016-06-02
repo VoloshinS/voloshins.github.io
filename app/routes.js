@@ -60,10 +60,31 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/features',
-      name: 'features',
+      path: '/articles',
+      name: 'articles',
       getComponent(nextState, cb) {
-        System.import('containers/FeaturePage')
+        const importModules = Promise.all([
+          System.import('containers/ArticlesPage/reducer'),
+          System.import('containers/ArticlesPage/sagas'),
+          System.import('containers/ArticlesPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('pocket', reducer.default);
+          injectSagas(sagas.default);
+
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/projects',
+      name: 'projects',
+      getComponent(nextState, cb) {
+        System.import('containers/ProjectsPage')
           .then(loadModule(cb))
           .catch(errorLoading);
       },
