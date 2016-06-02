@@ -12,8 +12,8 @@ git config user.email || git config user.email "travis@voloshins.js.org"
 # 3. Remove dist/ folder from .gitignore
 sed -i.bak '/build/d' .gitignore
 # 4. Add release files to new branch
-git branch | grep releases && git branch -D releases
-git checkout -b releases
+# git branch | grep releases && git branch -D releases
+# git checkout -b releases
 git add --all
 git commit -m "Released after: ${SHA}"
 # git push origin releases -f
