@@ -13,9 +13,10 @@ git config user.email || git config user.email "travis@voloshins.js.org"
 sed -i.bak '/build/d' .gitignore
 # 4. Add release files to new branch
 # git branch | grep releases && git branch -D releases
-# git checkout -b releases
+git checkout -b master
 git add --all
 git commit -m "Released after: ${SHA}"
+git subtree push --prefix build origin master
 # git push origin releases -f
 
 # 5. After that travis will automatically deploy from releases branch to deis repo.
