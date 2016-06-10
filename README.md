@@ -1,4 +1,4 @@
-###https://voloshins.js.org
+###http://voloshins.js.org
 <img src='https://travis-ci.org/VoloshinS/voloshins.github.io.svg?branch=master' />
 [![Code Climate](https://codeclimate.com/github/VoloshinS/voloshins.github.io/badges/gpa.svg)](https://codeclimate.com/github/VoloshinS/voloshins.github.io)
 
