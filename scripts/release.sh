@@ -5,7 +5,7 @@ SHA=`git rev-parse --verify HEAD`
 
 # 1. Build release files
 npm run build
-
+cp CNAME build/CNAME
 # 2. Set credentials if script run from CI
 git config user.name || git config user.name "Travis CI"
 git config user.email || git config user.email "travis@voloshins.js.org"
