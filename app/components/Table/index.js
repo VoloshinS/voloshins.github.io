@@ -22,7 +22,7 @@ function Table({ items }) {
         </tr>
       </thead>
       <tbody>
-        {items.map(({ title, link, year, autor }, i) => (
+        {items.map(({ title, link, year, author, status }, i) => (
           <tr key={i}>
             <td className={styles.td}>{i + 1}</td>
             <td className={styles.td}>
@@ -30,8 +30,9 @@ function Table({ items }) {
                 {title}
               </A>
             </td>
-            <td className={styles.td}>{autor}</td>
+            <td className={styles.td}>{author}</td>
             <td className={styles.td}>{year}</td>
+            <td className={styles.td}>{status}</td>
           </tr>
         ))}
       </tbody>
