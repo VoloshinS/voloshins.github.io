@@ -1,7 +1,29 @@
-###http://voloshins.js.org
-<img src='https://travis-ci.org/VoloshinS/voloshins.github.io.svg?branch=master' />
-[![Code Climate](https://codeclimate.com/github/VoloshinS/voloshins.github.io/badges/gpa.svg)](https://codeclimate.com/github/VoloshinS/voloshins.github.io)
+# voloshins.js.org
 
-Portfolio website on github pages (currently in development mode http://voloshins.js.org).
+Terminal-style portfolio site built with React + TypeScript + Vite.
 
-Powered by React.js, Redux, Node.js, Firebase, RedHead.
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Production build
+
+```bash
+npm run build
+```
+
+## Deploy to GitHub Pages
+
+```bash
+npm run deploy
+```
+
+The custom domain is configured via:
+
+- `CNAME`
+- `public/CNAME`
+
+Both are set to `voloshins.js.org`.
