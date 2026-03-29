@@ -150,7 +150,7 @@ describe("Terminal Component", () => {
       await user.type(terminalInput, "email{enter}");
       expect(window.open).toHaveBeenCalled();
       expect(screen.getByTestId("latest-output").firstChild?.textContent).toBe(
-        "contact@voloshins.js.org"
+        "voloshin1986+github@gmail.com"
       );
     });
 
